@@ -1,1 +1,34 @@
-<p>shopping-cart works!</p>
+@if (cartItems$ | async; as cartItems) {
+  @if (cartItems.length > 0) {
+    <h5>Carrito de la compra</h5>
+    @for (item of cartItems; track item.event.id) {
+      <div class="mb-3">
+        <h6 class="fw-bold mb-2">{{ item.event.title }}</h6>
+        <ul class="list-unstyled">
+          @for (c of item.cart; track c.sessionDate) {
+            <li class="d-flex align-items-center mb-1">
+              <div class="date-col">
+                {{ c.sessionDate | date:'dd/MM/yyyy' }}
+              </div>
+              <div class="ms-auto d-flex align-items-center">
+                <span class="text-black me-2 pe-3">x{{ c.quantity }}</span>
+                <button
+                  class="border-0 bg-transparent p-0"
+                  (click)="removeOne(item, c)"
+                >
+                  <img
+                    src="assets/img/trash.png"
+                    alt="trash"
+                    style="width: 18px;"
+                  />
+                </button>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  } @else {
+    <p>Carrito vacío</p>
+  }
+}

@@ -1,1 +1,47 @@
-<p>event-detail works!</p>
+@if (eventDetail$ | async; as detail) {
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="m-0">{{ detail.event.title }}</h4>
+      <button class="btn btn-link text-primary"  style="text-decoration: none;">
+        Volver
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="border p-3">
+          @if (detail.sessions.length > 0) {
+          @for (session of detail.sessions; track session.date) {
+          <div class="mb-2">
+            <div class="d-flex justify-content-between align-items-center p-2">
+              <div>
+                Fecha: {{ session.date | date:'dd/MM/yyyy' }},
+                Disponibilidad:
+                {{ session.availability - getSessionQty(detail.event.id, session.date) }}
+              </div>
+              <div class="d-flex align-items-center">
+                <button class="btn btn-link btn-sm text-primary me-2 bigger-symbol"
+                  (click)="decrement(detail.event, session.date, session.availability)" style="text-decoration: none;">
+                  &minus;
+                </button>
+                <span class="qty-number">
+                  {{ getSessionQty(detail.event.id, session.date) }}
+                </span>
+                <button class="btn btn-link btn-sm text-primary ms-2 bigger-symbol"
+                  (click)="increment(detail.event, session.date, session.availability)" style="text-decoration: none;">
+                  &#43;
+                </button>
+              </div>
+            </div>
+          </div>
+          }
+          } @else {
+          <p class="text-danger m-0">EVENT INFO NOT FOUND</p>
+          }
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <app-shopping-cart></app-shopping-cart>
+      </div>
+    </div>
+  </div>
+  }
