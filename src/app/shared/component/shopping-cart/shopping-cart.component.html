@@ -1,6 +1,5 @@
 @if (cartItems$ | async; as cartItems) {
   @if (cartItems.length > 0) {
-    <h5>Carrito de la compra</h5>
     @for (item of cartItems; track item.event.id) {
       <div class="mb-3">
         <h6 class="fw-bold mb-2">{{ item.event.title }}</h6>
@@ -31,4 +30,6 @@
   } @else {
     <p>Carrito vacío</p>
   }
+} @else {
+  <app-spinner></app-spinner>
 }

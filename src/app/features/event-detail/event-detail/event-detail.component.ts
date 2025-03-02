@@ -13,13 +13,14 @@ import { CartService } from '../../../core/services/cart.service';
 import { LoadingService } from '../../../core/services/loading.service';
 import { Event } from '../../../core/models/event';
 import { Session } from '../../../core/models/session';
-import { ShoppingCartComponent } from '../../../shared/component/shopping-cart/shopping-cart.component';
 
+import { SpinnerComponent } from '../../../shared/pages/spinner/spinner.component';
+import { ShoppingCartComponent } from '../../../shared/component/shopping-cart/shopping-cart.component';
 
 @Component({
   selector: 'app-event-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, ShoppingCartComponent, ],
+  imports: [CommonModule, RouterModule, SpinnerComponent,ShoppingCartComponent],
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -61,6 +62,4 @@ export class EventDetailComponent implements OnInit {
   public getSessionQty(eventId: string, date: number): number {
     return this.cartService.getSessionQuantity(eventId, date);
   }
-
-
 }

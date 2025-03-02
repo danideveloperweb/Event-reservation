@@ -4,12 +4,12 @@ import { CartService } from '../../../core/services/cart.service';
 import { Observable } from 'rxjs';
 import { CartItem } from '../../../core/models/cart-item';
 import { Cart } from '../../../core/models/cart';
-
+import { SpinnerComponent } from "../../pages/spinner/spinner.component";
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CommonModule, ],
+  imports: [CommonModule, SpinnerComponent],
   templateUrl: './shopping-cart.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

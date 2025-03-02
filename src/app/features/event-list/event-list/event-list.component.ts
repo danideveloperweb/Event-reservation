@@ -14,14 +14,13 @@ import { fromEvent, Subscription, Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { EventsService } from '../../../core/services/events.service';
 import { Event } from '../../../core/models/event';
-
+import { SpinnerComponent } from "../../../shared/pages/spinner/spinner.component";
 
 @Component({
   selector: 'app-event-list',
   standalone: true,
-  imports: [CommonModule, RouterLink,],
+  imports: [CommonModule, RouterLink, SpinnerComponent],
   templateUrl: './event-list.component.html',
-  styleUrl: './event-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EventListComponent implements OnInit, AfterViewInit, OnDestroy {
