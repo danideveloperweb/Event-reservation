@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@mixin theme-colors($header-color, $button-color) {
+  .custom-header {
+    background-color: $header-color;
+    padding: 20px;
+    box-shadow: 0px 8px 10px rgb(0, 0, 0);
+  }
+
+  :root {
+    .btn-custom {
+      background-color: $button-color;
+      &:hover {
+        background-color: lighten($button-color, 10%);
+      }
+    }
+  }
+}
+
+@include theme-colors(#53acd5, #078aba);
