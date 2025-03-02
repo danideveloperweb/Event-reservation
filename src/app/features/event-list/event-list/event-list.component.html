@@ -1,1 +1,37 @@
-<p>event-list works!</p>
+@if (events$ | async; as events) {
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      @for (event of events; track event.id) {
+      <div class="col-12 col-md-5 mb-4">
+        <div class="card h-100 d-flex flex-column shadow rounded-0">
+          <div class="card-body pt-3 pb-2 px-3">
+            <h5 class="card-title mb-1 pb-2">
+              <a [routerLink]="['/events', event.id]" [state]="{ allowed: true }" class="text-decoration-none">
+                {{ event.title }}
+              </a>
+            </h5>
+            <h6 class="card-subtitle text-muted mb-2">
+              <a [routerLink]="['/events', event.id]" [state]="{ allowed: true }" class="text-decoration-none">
+                {{ event.subtitle }}
+              </a>
+            </h6>
+          </div>
+          <img [src]="event.image || 'assets/img/sample-image.jpg'" class="card-img-top rounded-0" alt="{{ event.title }}"
+            [routerLink]="['/events', event.id]" [state]="{ allowed: true }" style="cursor: pointer;" />
+          <div class="card-body flex-grow-1 px-3 pt-2 d-flex flex-column">
+            <p class="card-text mb-1 text-muted">
+              {{ event.startDate | date:'dd/MM/yyyy' }} - {{ event.endDate | date:'dd/MM/yyyy' }}
+            </p>
+            <p #descRef class="card-text d-none d-md-block flex-grow-1" [innerHTML]="event.description"></p>
+          </div>
+          <div class="card-footer p-0 mt-auto border-0">
+            <a [routerLink]="['/events', event.id]" [state]="{ allowed: true }" class="btn btn-custom w-100 rounded-0">
+              Comprar
+            </a>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
