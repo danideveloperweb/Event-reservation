@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+import { detailGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -10,6 +10,7 @@ export const routes: Routes = [
   },
   {
     path: 'events/:id',
+    canActivate: [detailGuard],
     loadComponent: () =>
       import('../app/features/event-detail/event-detail/event-detail.component')
         .then(m => m.EventDetailComponent)

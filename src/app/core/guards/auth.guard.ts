@@ -1,5 +1,12 @@
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
+import { inject } from '@angular/core';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  return true;
+export const detailGuard: CanActivateFn = () => {
+  const router = inject(Router);
+  const navState = router.getCurrentNavigation()?.extras.state;
+  if (navState && navState['allowed']) {
+    return true;
+  }
+  router.navigate(['/events']);
+  return false;
 };
